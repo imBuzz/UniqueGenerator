@@ -1,0 +1,10 @@
+name: UniqueGenerators
+version: ${project.version}
+depend:
+  - NBTAPI
+main: me.imbuzz.dev.UniqueGenerators
+authors: [ ImBuzz ]
+
+commands:
+  generators:
+    description: Base command to use generators

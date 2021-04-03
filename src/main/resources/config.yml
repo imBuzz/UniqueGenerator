@@ -1,0 +1,46 @@
+generators:
+  example:
+    regenTime: 10
+    completedMaterial: "LOG"
+    waitingMaterial: "STONE"
+    giveMaterial: "DIAMOND"
+    item:
+      name: "&fWood Generator"
+      lore:
+        - ""
+        - "&f&lDrop"
+        - "&f&l* &r&f1x Diamond"
+        - ""
+        - "&f&lRespawn Time"
+        - "&f&l* &r&710 seconds"
+        - ""
+  gold:
+    regenTime: 20
+    completedMaterial: "GOLD_BLOCK"
+    waitingMaterial: "STONE"
+    giveMaterial: "GOLD_INGOT"
+    item:
+      name: "&fGold Resource"
+      lore:
+        - ""
+        - "&f&lDrop"
+        - "&f&l* &r&f1x Gold"
+        - ""
+        - "&f&lRespawn Time"
+        - "&f&l* &r&720 seconds"
+        - ""
+  bedrock:
+    regenTime: 30
+    completedMaterial: "BEDROCK"
+    waitingMaterial: "STONE"
+    giveMaterial: "BEDROCK"
+    item:
+      name: "&fBedrock Resource"
+      lore:
+        - ""
+        - "&f&lDrop"
+        - "&f&l* &r&f1x Bedrock"
+        - ""
+        - "&f&lRespawn Time"
+        - "&f&l* &r&730 seconds"
+        - ""
