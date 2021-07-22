@@ -11,7 +11,7 @@ public class AdminItems extends SubCommand {
 
     @Override
     public void onCommand(Player player, String[] args) {
-        uniqueGenerators.getGeneratorManager().getGeneratorItems().openScrollable(player);
+        uniqueGenerators.getGeneratorManager().getGeneratorItems().getInventory().open(player);
     }
 
     @Override

@@ -1,9 +1,6 @@
 package me.imbuzz.dev.listeners;
 
 import me.imbuzz.dev.UniqueGenerators;
-import me.imbuzz.dev.api.GeneratorBreakEvent;
-import me.imbuzz.dev.api.GeneratorPlaceEvent;
-import me.imbuzz.dev.api.GeneratorRemoveEvent;
 import me.imbuzz.dev.managers.GeneratorManager;
 import me.imbuzz.dev.objects.Generator;
 import me.imbuzz.dev.objects.GeneratorType;
@@ -37,13 +34,9 @@ public class BlockEvents implements Listener {
             if (generatorManager.isItemInHandAGenerator(ipoteticItem)){
                 GeneratorType generatorType = generatorManager.getGeneratorFromItem(ipoteticItem);
                 event.getBlockPlaced().getWorld().playEffect(event.getBlockPlaced().getLocation(), Effect.STEP_SOUND, generatorType.getWaitingMaterial());
-                GeneratorPlaceEvent startedEvent = new GeneratorPlaceEvent(generatorType);
-                Bukkit.getPluginManager().callEvent(startedEvent);
-                if (!startedEvent.isCancelled()){
-                    Generator generator = new Generator(generatorType, System.currentTimeMillis(), false, event.getBlock().getLocation());
-                    generator.setup();
-                    generatorManager.addGenerator(generator);
-                }
+                Generator generator = new Generator(generatorType, System.currentTimeMillis(), false, event.getBlock().getLocation());
+                generator.setup();
+                generatorManager.addGenerator(generator);
             }
         }
     }
@@ -53,26 +46,16 @@ public class BlockEvents implements Listener {
         Block block = event.getBlock();
         Location blockLocation = block.getLocation();
 
-        if (generatorManager.isAGenerator(blockLocation)){
+        if (generatorManager.isAGenerator(blockLocation)) {
             event.setCancelled(true);
             Generator generator = generatorManager.getGenerator(blockLocation);
-            if (event.getPlayer().isSneaking()){
-                GeneratorRemoveEvent startedEvent = new GeneratorRemoveEvent(generator);
-                Bukkit.getPluginManager().callEvent(startedEvent);
-                if (!startedEvent.isCancelled()){
-                    generatorManager.removeGenerator(blockLocation);
-                }
-                return;
-            }
-            if (generator.isReadyToBeHarvested()){
-                GeneratorBreakEvent startedEvent = new GeneratorBreakEvent(generator);
-                Bukkit.getPluginManager().callEvent(startedEvent);
-                if (!startedEvent.isCancelled()){
-                    generator.breakGenerator();
-                }
-            }
-            else {
-                event.getPlayer().sendMessage(ChatColor.YELLOW + "To break the generator you have to be shifted");
+            if (event.getPlayer().isSneaking()) {
+                generatorManager.removeGenerator(blockLocation);
+            } else if (generator.isReadyToBeHarvested()) {
+                generator.breakGenerator();
+
+            } else {
+                event.getPlayer().sendMessage(ChatColor.YELLOW + "In order break the generator you have to be shifted");
             }
         }
     }

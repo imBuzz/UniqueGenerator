@@ -1,7 +1,7 @@
 name: UniqueGenerators
 version: ${project.version}
 depend:
-  - NBTAPI
+  - SmartInvs
 main: me.imbuzz.dev.UniqueGenerators
 authors: [ ImBuzz ]
 

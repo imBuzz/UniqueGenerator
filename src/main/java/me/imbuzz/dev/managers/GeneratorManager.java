@@ -7,13 +7,13 @@ import lombok.Getter;
 import lombok.SneakyThrows;
 import me.imbuzz.dev.UniqueGenerators;
 import me.imbuzz.dev.files.FilesManager;
-import me.imbuzz.dev.guis.lists.GeneratorItems;
+import me.imbuzz.dev.guis.GeneratorItems;
 import me.imbuzz.dev.objects.Generator;
 import me.imbuzz.dev.objects.GeneratorType;
 import me.imbuzz.dev.tools.ItemBuilder;
 import me.imbuzz.dev.tools.Useful;
 import me.imbuzz.dev.workload.CheckGenTask;
-import me.imbuzz.dev.workload.WorkloadThread;
+import me.imbuzz.dev.workload.abstractation.WorkloadThread;
 import org.bukkit.Bukkit;
 import org.bukkit.Effect;
 import org.bukkit.Location;
@@ -101,7 +101,7 @@ public class GeneratorManager {
 
                     ArrayList<ItemStack> currentItems = Lists.newArrayList();
                     getLoadedGenerators().values().forEach(value -> currentItems.add(value.createItem()));
-                    generatorItems = new GeneratorItems("Generators List", currentItems);
+                    generatorItems = new GeneratorItems(uniqueGenerators, currentItems);
                 }
                 catch (Exception e1){
                     Bukkit.getLogger().severe("[UniqueGenerators Error]: " + e1.getLocalizedMessage() + ", check your config.yml!");

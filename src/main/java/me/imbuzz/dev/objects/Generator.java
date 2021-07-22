@@ -1,7 +1,8 @@
 package me.imbuzz.dev.objects;
 
 import lombok.Getter;
-import org.bukkit.*;
+import org.bukkit.Effect;
+import org.bukkit.Location;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.UUID;
@@ -41,10 +42,5 @@ public class Generator {
         readyToBeHarvested = false;
         lastBrokenTime = System.currentTimeMillis();
     }
-
-    public int getSecondsBetweenLastRegenAndNow(){
-        return (int) ((System.currentTimeMillis() - lastBrokenTime) / 1000);
-    }
-
 
 }

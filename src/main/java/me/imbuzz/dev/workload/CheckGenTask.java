@@ -3,6 +3,7 @@ package me.imbuzz.dev.workload;
 import lombok.RequiredArgsConstructor;
 import me.imbuzz.dev.managers.GeneratorManager;
 import me.imbuzz.dev.objects.Generator;
+import me.imbuzz.dev.workload.abstractation.WorkloadThread;
 import org.bukkit.scheduler.BukkitRunnable;
 
 @RequiredArgsConstructor
@@ -14,7 +15,7 @@ public class CheckGenTask extends BukkitRunnable {
     @Override
     public void run() {
         for (Generator generator : generatorManager.getOnlineGenerators().values()) {
-            if (!generator.isReadyToBeHarvested() && (generator.getSecondsBetweenLastRegenAndNow() + 2) >= generator.getGeneratorType().getRegenTime())
+            if (!generator.isReadyToBeHarvested() && System.currentTimeMillis() - generator.getLastBrokenTime() >= generator.getGeneratorType().getRegenTime() * 1000L)
                 workload.addLoad(new GenWorkLoad(generator));
         }
     }
