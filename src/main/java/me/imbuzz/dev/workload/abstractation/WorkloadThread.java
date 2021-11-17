@@ -1,14 +1,13 @@
 package me.imbuzz.dev.workload.abstractation;
 
-import com.google.common.collect.Queues;
 import lombok.SneakyThrows;
 
-import java.util.ArrayDeque;
+import java.util.concurrent.ConcurrentLinkedDeque;
 
 public class WorkloadThread implements Runnable {
 
     private final int MAX_MS_PER_TICK = 10;
-    private final ArrayDeque<Workload> workloadDeque = Queues.newArrayDeque();
+    private final ConcurrentLinkedDeque<Workload> workloadDeque = new ConcurrentLinkedDeque<>();
 
     public void addLoad(Workload workload){
         workloadDeque.add(workload);
